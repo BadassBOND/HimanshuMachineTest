@@ -1,0 +1,10 @@
+.regis{
+    text-align-last: center;
+}
+mat-slider {
+    width: 200px;
+  }
+
+  .error{
+    color: red;
+  }

@@ -1,0 +1,63 @@
+<mat-dialog-content class="mat-typography">
+  <form class="regis" [formGroup]="myDataForm!">
+
+    <h2>Register</h2>
+    <hr>
+
+    <label class="hoverable" for="fileInput">
+      <img style="height: 100px;width: 100px;padding-right: 25em;"
+        [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'">
+    </label>
+    <br />
+    <input id="fileInput" style="padding-right: 18em;" type='file' (change)="onSelectFile($event)">
+    <br>
+
+    <input type="text" placeholder="First Name" formControlName="name" pattern="[a-zA-Z]*" maxlength="(20)">&nbsp;&nbsp;
+    <span class="error" *ngIf="myDataForm.get('name')?.touched && myDataForm.get('name')?.errors?.['required']">Enter Name</span>
+    <span class="error" *ngIf="myDataForm.get('name')?.touched && myDataForm.get('name')?.errors?.['pattern']">Alphabets only</span>
+    <span class="error" *ngIf="myDataForm.get('name')?.touched && myDataForm.get('name')?.errors?.['maxlength']">Atleast 20
+      characters</span>
+
+    <input type="text" placeholder="Last Name"><br><br>
+    <input type="email" placeholder="Email"><br><br>
+    <input type="number" placeholder="Contact no."><br><br>
+
+    Age:<mat-slider min="20" max="60" discrete [displayWith]="formatLabel">
+         <input matSliderThumb>
+        </mat-slider>
+    <br>
+    <select name="States">
+      <option value=""></option>
+      <option value="Maharashtra">Maharashtra</option>
+      <option value="Hariyana">Hariyana</option>\
+      <option value="Kerala">Kerala</option>
+      <option value="Gujra">Gujrat</option>
+    </select><br><br>
+
+    <select name="Country" id="">
+      <option value=""></option>
+      <option value="India">India</option>
+      <option value="London">London</option>\
+      <option value="Ameraca">America</option>
+      <option value="China">China</option>
+    </select><br><br>
+
+
+
+    <label for="addressType"></label>
+    <select id="addressType" onchange="showFields(this.value)">
+        <option value="home">Home</option>
+        <option value="company">Company</option>
+    </select>
+    <br><br>
+
+    <input type="text" placeholder="Tags"><br><br>
+
+    <input type="checkbox">Subscribe to Newsletter <br><br>
+
+    <button>Cancel</button>&nbsp;&nbsp;
+
+    <button (click)="submitprofile()">Submit</button>
+
+  </form>
+</mat-dialog-content>
