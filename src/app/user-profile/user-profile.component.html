@@ -3,16 +3,18 @@
 
 <label class="hoverable" for="fileInput">
       <img style="height: 100px;width: 100px;padding-right: 25em;"
-      [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'">    
+      [src]="this.userService.profilePhoto">    
 </label>
+
 <div class="butt">
-  <button >Edit Photo</button>&nbsp;&nbsp;
-  <button>Edit Profile</button>
+  <button mat-raised-button (click)="openDialog()">Edit Profile</button> &nbsp;&nbsp;&nbsp;
+  <button >Edit Photo</button>
+  <input id="fileInput" style="padding-right: 18em;" type='file' (change)="onSelectFile($event)">
 </div><br>
 
-<p class="content">i'm Himanshu Tembhurkar and iam 24 years old and u can <br> send your mails to himanshutembhurkar0@gmail.com <br>
-    I live in Pune i like to play cricket, football , coocking. <br> And please send me newsletters .
-    Please reach <br>out to me on my Phone number 7219418490.
+<p class="content">I'm {{this.profile.firstname}}  {{this.profile.lastname}} and iam {{this.profile.age}} years old and <br> u can send your mails to {{this.profile.email}} . <br>
+    I live in {{this.profile.States}} and i like {{this.profile.tag}}. <br> And please send me newsletters .
+    Please reach <br>out to me on my Phone number {{this.profile.contact}}.
 </p><br>
 
 <button class="prof">I Agree</button>

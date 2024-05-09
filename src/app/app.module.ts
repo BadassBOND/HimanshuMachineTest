@@ -11,6 +11,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserServiceService } from './user-service.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [UserServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSliderModule} from '@angular/material/slider';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { UserServiceService } from '../user-service.service';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @Component({
   selector: 'app-user-registration',
@@ -16,15 +18,16 @@ import { Router } from '@angular/router';
     MatButtonModule,
      MatSliderModule,
      ReactiveFormsModule,
-     CommonModule]
+     CommonModule],
+     providers: [UserProfileComponent]
 })
 export class UserRegistrationComponent {
 
 myDataForm! : FormGroup;
 showContent = true
 url:any;
-
-constructor(private formbuilder: FormBuilder , private router : Router){}
+profileData:any;
+constructor(private formbuilder: FormBuilder , private router : Router, public userService : UserServiceService,public userprofile : UserProfileComponent){}
 
 formatLabel(value: number): string {
   if (value >= 20) {
@@ -46,17 +49,41 @@ onSelectFile(event:any) {
 }
 
 ngOnInit(){
+
+  this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   this.myForm();
+  // this.profileData = {
+  //   firstName:'',
+  //   lastName:'',
+  //   email:'',
+  //   contactNumber:'',
+  //   age:'',
+  //   state:'',
+  //   country:''
+  // }
 }
 
 myForm(){
+  
   this.myDataForm = this.formbuilder.group({
-   name:['',[Validators.required,Validators.pattern(/^[a-zA-Z]*$/),Validators.maxLength(20)]]
+   firstname:['',[Validators.required,Validators.pattern(/^[a-zA-Z]*$/),Validators.maxLength(20)]],
+   lastname:['',[Validators.required,Validators.pattern(/^[a-zA-Z]*$/),Validators.maxLength(20)]],
+   email : ['',[Validators.required]],
+   contact : ['',[Validators.required,Validators.pattern("[0-9]*$")]],
+   checkbox : ['',[Validators.requiredTrue]],
+   age:['',[Validators.required]],
+   States: ['',[Validators.required]],
+   tag: ['',[Validators.required]]
 
   })
+
+
 }
 
 submitprofile(){
+   this.userService.profileData = this.myDataForm;
+   this.userService.profilePhoto = this.url;
+   this.userprofile.ngOnInit();
   this.router.navigateByUrl('submitprofile');
 }
 
